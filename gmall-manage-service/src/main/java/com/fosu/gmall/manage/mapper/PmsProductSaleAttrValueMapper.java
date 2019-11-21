@@ -1,4 +1,7 @@
 package com.fosu.gmall.manage.mapper;
 
-public interface PmsProductSaleAttrValueMapper {
+import com.fosu.gmall.bean.PmsProductSaleAttrValue;
+import tk.mybatis.mapper.common.Mapper;
+
+public interface PmsProductSaleAttrValueMapper extends Mapper<PmsProductSaleAttrValue> {
 }

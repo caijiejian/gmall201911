@@ -1,4 +1,4 @@
-package com.fosu.gmall.manage.user.controller;
+package com.fosu.gmall.user.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

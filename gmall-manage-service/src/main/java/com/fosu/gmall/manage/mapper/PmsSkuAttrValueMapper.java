@@ -1,4 +1,7 @@
 package com.fosu.gmall.manage.mapper;
 
-public interface PmsSkuAttrValueMapper {
+import com.fosu.gmall.bean.PmsSkuAttrValue;
+import tk.mybatis.mapper.common.Mapper;
+
+public interface PmsSkuAttrValueMapper extends Mapper<PmsSkuAttrValue> {
 }
