@@ -83,16 +83,17 @@ public class SpuServiceImpl implements SpuService {
 
     @Override
     public List<PmsProductSaleAttr> getSpuSaleAttrListCheckBySku(String productId, String skuId) {
-        Example example = new Example(PmsProductSaleAttr.class);
-        example.createCriteria().andEqualTo("productId",productId);
-        List<PmsProductSaleAttr> pmsProductSaleAttrs = pmsProductSaleAttrMapper.selectByExample(example);
-        for(PmsProductSaleAttr pmsProductSaleAttr:pmsProductSaleAttrs){
-            String saleAttrId = pmsProductSaleAttr.getSaleAttrId();
-            Example example1 = new Example(PmsProductSaleAttrValue.class);
-            example1.createCriteria().andEqualTo("saleAttrId", saleAttrId).andEqualTo("productId",productId);
-            List<PmsProductSaleAttrValue> pmsProductSaleAttrValues = pmsProductSaleAttrValueMapper.selectByExample(example1);
-            pmsProductSaleAttr.setSpuSaleAttrValueList(pmsProductSaleAttrValues);
-        }
+//        Example example = new Example(PmsProductSaleAttr.class);
+//        example.createCriteria().andEqualTo("productId",productId);
+//        List<PmsProductSaleAttr> pmsProductSaleAttrs = pmsProductSaleAttrMapper.selectByExample(example);
+//        for(PmsProductSaleAttr pmsProductSaleAttr:pmsProductSaleAttrs){
+//            String saleAttrId = pmsProductSaleAttr.getSaleAttrId();
+//            Example example1 = new Example(PmsProductSaleAttrValue.class);
+//            example1.createCriteria().andEqualTo("saleAttrId", saleAttrId).andEqualTo("productId",productId);
+//            List<PmsProductSaleAttrValue> pmsProductSaleAttrValues = pmsProductSaleAttrValueMapper.selectByExample(example1);
+//            pmsProductSaleAttr.setSpuSaleAttrValueList(pmsProductSaleAttrValues);
+//        }
+        List<PmsProductSaleAttr> pmsProductSaleAttrs = pmsProductSaleAttrMapper.getSpuSaleAttrListCheckBySku(productId, skuId);
         return pmsProductSaleAttrs;
     }
 }

@@ -11,6 +11,7 @@
 	</head>
 	<body>
 		<div id="max">
+			<input type="hidden" th:value="${skuSaleAttrHashJsonStr}" id="valuesSku"/>
 		<header>
 
 					<div class="min">
@@ -226,7 +227,7 @@
 							<div class="box-attr-2 clear"  th:each="spuSaleAttr:${spuSaleAttrListCheckBySku}">
 								<dl>
 									<dt th:text="${spuSaleAttr.saleAttrName}">选择颜色</dt>
-									<dd  th:class="redborder" th:each="saleAttrValue:${spuSaleAttr.spuSaleAttrValueList}">
+									<dd  th:class="(${saleAttrValue.isChecked}==1?'redborder':'')" th:each="saleAttrValue:${spuSaleAttr.spuSaleAttrValueList}">
 										<div th:value="${saleAttrValue.id}" th:text="${saleAttrValue.saleAttrValueName}">
 											  摩卡金
 										</div>
@@ -1026,15 +1027,11 @@
             // 拼接成属性值串
             for (var i = 0; i < checkDivs.length; i++) {
                 var saleAttrValueDiv = checkDivs.eq(i);
-                if(i>0){
-                    valueIds= valueIds+"|";
-                }
-                valueIds=valueIds+saleAttrValueDiv.attr("value");
+                valueIds=valueIds+saleAttrValueDiv.attr("value")+"|";
             }
             //页面上的hashjson
             var valuesSku = $("#valuesSku").attr("value");
             var valuesSkuJson=JSON.parse(valuesSku);
-
             // 看看hash有没有
             var skuId= valuesSkuJson[valueIds];
             // 当前sku
