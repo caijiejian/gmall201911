@@ -12,6 +12,7 @@ import com.fosu.gmall.manage.mapper.PmsSkuSaleAttrValueMapper;
 import com.fosu.gmall.service.SkuServcie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -48,5 +49,28 @@ public class SkuServiceImpl implements SkuServcie {
             pmsSkuImageMapper.insertSelective(pmsSkuImage);
         }
 
+    }
+
+    @Override
+    public PmsSkuInfo getSkuInfo(String skuId) {
+        PmsSkuInfo pmsSkuInfo = pmsSkuInfoMapper.selectByPrimaryKey(skuId);
+
+//        String id = pmsSkuInfo.getId();
+        Example example = new Example(PmsSkuSaleAttrValue.class);
+        example.createCriteria().andEqualTo("skuId",skuId);
+        List<PmsSkuSaleAttrValue> pmsSkuSaleAttrValues = pmsSkuSaleAttrValueMapper.selectByExample(example);
+        pmsSkuInfo.setSkuSaleAttrValueList(pmsSkuSaleAttrValues);
+
+        Example example1 = new Example(PmsSkuAttrValue.class);
+        example1.createCriteria().andEqualTo("skuId",skuId);
+        List<PmsSkuAttrValue> pmsSkuAttrValues = pmsSkuAttrValueMapper.selectByExample(example1);
+        pmsSkuInfo.setSkuAttrValueList(pmsSkuAttrValues);
+
+        Example example2 = new Example(PmsSkuImage.class);
+        example2.createCriteria().andEqualTo("skuId",skuId);
+        List<PmsSkuImage> pmsSkuImages = pmsSkuImageMapper.selectByExample(example2);
+        pmsSkuInfo.setSkuImageList(pmsSkuImages);
+
+        return pmsSkuInfo;
     }
 }

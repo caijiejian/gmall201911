@@ -37,7 +37,6 @@ public class SpuController {
     @RequestMapping("fileUpload")
     public String fileUpload(@RequestParam("file") MultipartFile multipartFile){
         String imgUrl = PmsUploadUtil.uploadImage(multipartFile);
-        System.out.println(imgUrl);
         return imgUrl;
     }
 
